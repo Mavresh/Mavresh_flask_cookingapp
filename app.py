@@ -164,11 +164,7 @@ def logout():
 @app.route('/recipes', methods=['GET'])
 @login_required
 def recipes():
-    query = request.args.get('query')
-    if query:
-        all_recipes = Recipe.query.filter(Recipe.title.ilike(f'%{query}%')).all()
-    else:
-        all_recipes = Recipe.query.all()
+    all_recipes = Recipe.query.all()
     return render_template('recipes.html', recipes=all_recipes)
 
 @app.route('/recipe/<int:recipe_id>')
@@ -217,4 +213,3 @@ def inject_user():
 
 if __name__ == '__main__':
     app.run(debug=True)
-# this comment is for git stash
